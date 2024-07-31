@@ -36,7 +36,7 @@ export default function OrderPage() {
   const handleSubmit = async (values: typeof orderCreateForm.values) => {
     try {
       setIsProcessing(true);
-      const response = await axios.post<Order>(`/order`, {
+      await axios.post<Order>(`/order`, {
         ...values,
         total: values.total, // Ensure total is included in the payload
       });

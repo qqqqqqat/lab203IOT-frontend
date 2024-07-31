@@ -7,13 +7,11 @@ import { modals } from "@mantine/modals";
 import { Alert, Button } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios, { AxiosError } from "axios";
 
 export default function Alloforder() {
   // Fetch orders
   const { data: orders, error: ordersError, mutate } = useSWR<Order[]>("/order");
-  const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
   
   // Handle loading state
@@ -49,7 +47,7 @@ export default function Alloforder() {
 
   const handleDelete = async (orderId: string) => {
     try {
-      setIsProcessing(true);
+     
       await axios.delete(`/order/${orderId}`);
       notifications.show({
         title: "ลบคำสั่งซื้อสำเร็จ",
@@ -81,8 +79,6 @@ export default function Alloforder() {
           color: "red",
         });
       }
-    } finally {
-      setIsProcessing(false);
     }
   };
 

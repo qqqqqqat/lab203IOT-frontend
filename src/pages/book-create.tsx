@@ -7,6 +7,9 @@ import axios, { AxiosError } from "axios";
 import { notifications } from "@mantine/notifications";
 import { Book } from "../lib/models";
 
+
+
+
 export default function BookCreatePage() {
   const navigate = useNavigate();
 
@@ -75,6 +78,12 @@ export default function BookCreatePage() {
               label="ชื่อหนังสือ"
               placeholder="ชื่อหนังสือ"
               {...bookCreateForm.getInputProps("title")}
+            /> 
+
+            <TextInput
+              label="ใส่ URL รูปภาพ"
+              placeholder="ใส่ URL รูปภาพ"
+              {...bookCreateForm.getInputProps("imgurl")}
             />
 
             <TextInput
@@ -92,8 +101,27 @@ export default function BookCreatePage() {
             />
 
             {/* TODO: เพิ่มรายละเอียดหนังสือ */}
+            <TextInput
+              label="รายละเอียดหนังสือ"
+              placeholder="รายละเอียดหนังสือ"
+              {...bookCreateForm.getInputProps("describe")}
+            />
+
+
+
             {/* TODO: เพิ่มเรื่องย่อ */}
+            <TextInput
+              label="เรื่องย่อ"
+              placeholder="เรื่องย่อ"
+              {...bookCreateForm.getInputProps("summary")}
+            />
+
             {/* TODO: เพิ่มหมวดหมู่(s) */}
+             <TextInput
+              label="หมวดหมู่"
+              placeholder="หมวดหมู๋"
+              {...bookCreateForm.getInputProps("category")}
+            />
 
             <Checkbox
               label="เผยแพร่"

@@ -1,14 +1,14 @@
 import Layout from "../components/layout";
-import cafeBackgroundImage from "../assets/images/bg-cafe-2.jpg";
+import cafeBackgroundImage from "../assets/images/cafebackg.jpg";
 import useSWR from "swr";
-import { Book } from "../lib/models";
+import { Menu } from "../lib/models";
 import Loading from "../components/loading";
 import { Alert, Button } from "@mantine/core";
 import { IconAlertTriangleFilled, IconPlus } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
-export default function BooksPage() {
-  const { data: books, error } = useSWR<Book[]>("/books");
+export default function MenuPage() {
+  const { data: menu, error } = useSWR<Menu[]>("/menu");
 
   return (
     <>
@@ -19,27 +19,29 @@ export default function BooksPage() {
             backgroundImage: `url(${cafeBackgroundImage})`,
           }}
         >
-          <h1 className="text-5xl mb-2">หนังสือ</h1>
-          <h2>รายการหนังสือทั้งหมด</h2>
+          <h1 className="text-5xl mb-2">เมนูเครื่องดื่ม</h1>
+          <h2>รายการเมนูเครื่องดื่มทั้งหมด</h2>
         </section>
 
         <section className="container mx-auto py-8">
           <div className="flex justify-between">
-            <h1>รายการหนังสือ</h1>
+            <h1>รายการเมนูเครื่องดื่ม</h1>
 
             <Button
               component={Link}
               leftSection={<IconPlus />}
-              to="/books/create"
+              to="/menu/create"
               size="xs"
               variant="primary"
               className="flex items-center space-x-2"
             >
-              เพิ่มหนังสือ
+              เพิ่มเมนู
             </Button>
+
+            
           </div>
 
-          {!books && !error && <Loading />}
+          {!menu && !error && <Loading />}
           {error && (
             <Alert
               color="red"
@@ -51,20 +53,19 @@ export default function BooksPage() {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {books?.map((book) => (
-              <div className="border border-solid border-neutral-200" key={book.id}>
+            {menu?.map((menu) => (
+              <div className="border border-solid border-neutral-200" key={menu.id}>
                 <img
-                  src={book.imgurl || "https://placehold.co/150x200"}
-                  alt={book.title}
+                  src={menu.imgurl || "https://placehold.co/150x200"}
+                  alt={menu.menuname}
                   className="w-full object-cover aspect-[3/4]"
                 />
                 <div className="p-4">
-                  <h2 className="text-lg font-semibold line-clamp-2">{book.title}</h2>
-                  <p className="text-xs text-neutral-500">โดย {book.author}</p>
+                  <h2 className="text-lg font-semibold line-clamp-2">{menu.menuname}</h2>
                 </div>
 
                 <div className="flex justify-end px-4 pb-2">
-                  <Button component={Link} to={`/books/${book.id}`} size="xs" variant="default">
+                  <Button component={Link} to={`/menu/${menu.id}`} size="xs" variant="default">
                     ดูรายละเอียด
                   </Button>
                 </div>
